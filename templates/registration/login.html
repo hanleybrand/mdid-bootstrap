@@ -1,0 +1,57 @@
+{% extends 'bootstrap-master.html' %}
+
+{% block javascript %}
+{{ block.super }}
+<script type="text/javascript">
+
+  $(document).ready(function() {
+    var login = $("#{{ form.username.auto_id }}");
+    if (!login.val()) login.focus();
+  });
+
+</script>
+{% endblock %}
+
+
+{% block content %}
+<div class="container">
+<h1>Log in</h1>
+
+{% if form.errors %}
+<p>Your username and password didn't match. Please try again.</p>
+{% endif %}
+
+<form method="post" action="." class="form-horizontal">{% csrf_token %}
+    <fieldset>
+
+    <!-- Form Name -->
+         <legend>Log in</legend>
+    <!-- Text input-->
+        <div class="control-group">
+      <label class="control-label" for="username">Username</label>
+      <div class="controls">
+        <input id="username" name="username" type="text" placeholder="" class="input-large">
+
+      </div>
+    </div>
+    <!-- Password input-->
+      <div class="control-group">
+      <label class="control-label" for="passwordinput">Password</label>
+      <div class="controls">
+        <input id="passwordinput" name="passwordinput" type="password" placeholder="" class="input-large">
+        <p class="help-block">help</p>
+      </div>
+    </div>
+    <!-- Button -->
+    <div class="control-group">
+      <label class="control-label" for="login"></label>
+      <div class="controls">
+        <button id="login" name="login" class="btn btn-default">Log in</button>
+      </div>
+    </div>
+    </fieldset>
+    <input type="hidden" name="next" value="{{ next }}" />
+</form>
+</div>
+
+{% endblock %}
